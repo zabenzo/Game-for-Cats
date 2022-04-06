@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Infrastructure.Factory;
+using Infrastructure.SceneLoader;
 using Infrastructure.StateMachine.States;
 
 namespace Infrastructure.StateMachine
@@ -15,6 +17,7 @@ namespace Infrastructure.StateMachine
             _states = new Dictionary<Type, IState>()
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, serviceLocator, coroutineRunner),
+                [typeof(MainMenuState)] = new MainMenuState(this, loadingCurtain, serviceLocator.Single<ISceneLoader>(), serviceLocator.Single<IMainMenuFactory>()),
             };
         }
 

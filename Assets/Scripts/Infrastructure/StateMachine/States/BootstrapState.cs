@@ -21,7 +21,7 @@ namespace Infrastructure.StateMachine.States
 
         public void Enter()
         {
-            
+            _gameStateMachine.Enter<MainMenuState>();
         }
 
         public void Exit()

@@ -1,4 +1,5 @@
 using Infrastructure.AssetProvider;
+using UnityEngine;
 
 namespace Infrastructure.Factory
 {
@@ -9,6 +10,14 @@ namespace Infrastructure.Factory
         public MainMenuFactory(IAssetProvider assetProvider)
         {
             _assetProvider = assetProvider;
+        }
+
+        public GameObject CreateMainMenuCanvas()
+        {
+            GameObject mainMenuPrefab =
+                Object.Instantiate(_assetProvider.MainMenuCanvas(), Vector2.zero, Quaternion.identity);
+
+            return mainMenuPrefab;
         }
     }
 }
