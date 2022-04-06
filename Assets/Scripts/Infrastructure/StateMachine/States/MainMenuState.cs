@@ -32,7 +32,7 @@ namespace Infrastructure.StateMachine.States
 
         private void InitializeMainMenu()
         {
-            MainMenuController mainMenuController = new MainMenuController(_sceneLoader);
+            MainMenuController mainMenuController = new MainMenuController(_gameStateMachine);
             GameObject mainMenuCanvas = _mainMenuFactory.CreateMainMenuCanvas();
             mainMenuCanvas.GetComponent<MainMenu.MainMenu>().OnPlayButtonClick += mainMenuController.OnPlayButtonClick;
         }

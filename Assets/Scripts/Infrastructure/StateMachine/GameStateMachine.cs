@@ -18,6 +18,7 @@ namespace Infrastructure.StateMachine
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, serviceLocator, coroutineRunner),
                 [typeof(MainMenuState)] = new MainMenuState(this, loadingCurtain, serviceLocator.Single<ISceneLoader>(), serviceLocator.Single<IMainMenuFactory>()),
+                [typeof(LoadGameState)] = new LoadGameState(this, serviceLocator.Single<ISceneLoader>()),
             };
         }
 
