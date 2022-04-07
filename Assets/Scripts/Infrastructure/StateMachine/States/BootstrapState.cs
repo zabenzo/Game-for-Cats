@@ -1,6 +1,8 @@
 using Infrastructure.AssetProvider;
 using Infrastructure.Factory;
 using Infrastructure.SceneLoader;
+using Input;
+using Utility;
 
 namespace Infrastructure.StateMachine.States
 {
@@ -31,9 +33,12 @@ namespace Infrastructure.StateMachine.States
 
         private void RegisterServices()
         {
+            _serviceLocator.RegisterSingle<IInputService>(new InputService());
+            _serviceLocator.RegisterSingle<IScreenUtility>(new ScreenUtility());
             _serviceLocator.RegisterSingle<ISceneLoader>(new SceneLoader.SceneLoader(_coroutineRunner));
             _serviceLocator.RegisterSingle<IGameStateMachine>(_gameStateMachine);
             _serviceLocator.RegisterSingle<IAssetProvider>(new AssetProvider.AssetProvider());
+            _serviceLocator.RegisterSingle<IGameFactory>(new GameFactory(_serviceLocator.Single<IAssetProvider>()));
             _serviceLocator.RegisterSingle<IMainMenuFactory>(new MainMenuFactory(_serviceLocator.Single<IAssetProvider>()));
         }
     }

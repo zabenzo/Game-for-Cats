@@ -14,7 +14,6 @@ namespace MainMenu
         
         public void OnPlayButtonClick()
         {
-            // TODO:: Enter into new load state and initialize all that scene need.
             _gameStateMachine.Enter<LoadGameState>();
         }
     }
