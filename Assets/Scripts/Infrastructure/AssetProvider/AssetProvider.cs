@@ -6,7 +6,7 @@ namespace Infrastructure.AssetProvider
     {
         private const string MainMenuCanvasPrefabPath = "MainMenu/MainMenuCanvas";
         private const string MousePrefab = "Game/Mouse";
-        private const string GameUIPrefab = "";
+        private const string GameUIPrefab = "GameUI/GameUI";
         private const string GameEnvironmentPrefab = "";
 
 
