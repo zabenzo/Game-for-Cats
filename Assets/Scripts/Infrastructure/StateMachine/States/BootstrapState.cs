@@ -1,3 +1,4 @@
+using Advertisement;
 using Infrastructure.AssetProvider;
 using Infrastructure.Factory;
 using Infrastructure.Input;
@@ -36,6 +37,7 @@ namespace Infrastructure.StateMachine.States
 
         private void RegisterServices()
         {
+            _serviceLocator.RegisterSingle<IAdvertisementService>(new AdvertisementService(testModeEnable: true));
             _serviceLocator.RegisterSingle<IInputService>(new InputService());
             _serviceLocator.RegisterSingle<IScreenUtility>(new ScreenUtility());
             _serviceLocator.RegisterSingle<ISceneLoader>(new SceneLoader.SceneLoader(_coroutineRunner));

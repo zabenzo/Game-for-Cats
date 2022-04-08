@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Advertisement;
 using Infrastructure.Factory;
 using Infrastructure.SceneLoader;
 using Infrastructure.StateMachine.States;
@@ -19,7 +20,7 @@ namespace Infrastructure.StateMachine
                 [typeof(BootstrapState)] = new BootstrapState(this, serviceLocator, coroutineRunner, loadingCurtain),
                 [typeof(MainMenuState)] = new MainMenuState(this, loadingCurtain, serviceLocator.Single<ISceneLoader>(), serviceLocator.Single<IMainMenuFactory>()),
                 [typeof(LoadGameState)] = new LoadGameState(this, serviceLocator.Single<ISceneLoader>(), serviceLocator.Single<IGameFactory>(), loadingCurtain),
-                [typeof(GameLoopState)] = new GameLoopState(this, loadingCurtain)
+                [typeof(GameLoopState)] = new GameLoopState(this, loadingCurtain, serviceLocator.Single<IAdvertisementService>(), coroutineRunner)
             };
         }
 
