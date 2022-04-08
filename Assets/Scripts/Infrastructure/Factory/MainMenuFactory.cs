@@ -7,17 +7,10 @@ namespace Infrastructure.Factory
     {
         private readonly IAssetProvider _assetProvider;
 
-        public MainMenuFactory(IAssetProvider assetProvider)
-        {
+        public MainMenuFactory(IAssetProvider assetProvider) => 
             _assetProvider = assetProvider;
-        }
 
-        public GameObject CreateMainMenuCanvas()
-        {
-            GameObject mainMenuPrefab =
-                Object.Instantiate(_assetProvider.MainMenuCanvas(), Vector2.zero, Quaternion.identity);
-
-            return mainMenuPrefab;
-        }
+        public GameObject CreateMainMenuCanvas() => 
+            Object.Instantiate(_assetProvider.MainMenuCanvas(), Vector2.zero, Quaternion.identity);
     }
 }

@@ -4,11 +4,9 @@ namespace Infrastructure.StateMachine.States
     {
         private readonly IGameStateMachine _gameStateMachine;
 
-        public GameLoopState(IGameStateMachine gameStateMachine)
-        {
+        public GameLoopState(IGameStateMachine gameStateMachine) => 
             _gameStateMachine = gameStateMachine;
-        }
-        
+
         public void Enter()
         {
             

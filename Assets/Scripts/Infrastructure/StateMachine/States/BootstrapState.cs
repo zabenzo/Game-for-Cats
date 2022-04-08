@@ -1,7 +1,7 @@
 using Infrastructure.AssetProvider;
 using Infrastructure.Factory;
+using Infrastructure.Input;
 using Infrastructure.SceneLoader;
-using Input;
 using Utility;
 
 namespace Infrastructure.StateMachine.States
@@ -21,10 +21,8 @@ namespace Infrastructure.StateMachine.States
             RegisterServices();
         }
 
-        public void Enter()
-        {
+        public void Enter() => 
             _gameStateMachine.Enter<MainMenuState>();
-        }
 
         public void Exit()
         {

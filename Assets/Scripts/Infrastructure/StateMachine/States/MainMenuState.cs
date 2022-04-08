@@ -1,6 +1,6 @@
+using Game.MainMenu;
 using Infrastructure.Factory;
 using Infrastructure.SceneLoader;
-using MainMenu;
 using UnityEngine;
 
 namespace Infrastructure.StateMachine.States
@@ -20,10 +20,8 @@ namespace Infrastructure.StateMachine.States
             _mainMenuFactory = mainMenuFactory;
         }
         
-        public void Enter()
-        {
+        public void Enter() => 
             _sceneLoader.Load("MainMenu", InitializeMainMenu);
-        }
 
         public void Exit()
         {
@@ -34,7 +32,7 @@ namespace Infrastructure.StateMachine.States
         {
             MainMenuController mainMenuController = new MainMenuController(_gameStateMachine);
             GameObject mainMenuCanvas = _mainMenuFactory.CreateMainMenuCanvas();
-            mainMenuCanvas.GetComponent<MainMenu.MainMenu>().OnPlayButtonClick += mainMenuController.OnPlayButtonClick;
+            mainMenuCanvas.GetComponent<MainMenu>().OnPlayButtonClick += mainMenuController.OnPlayButtonClick;
         }
     }
 }

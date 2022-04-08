@@ -1,6 +1,6 @@
 using System;
+using Infrastructure.Input;
 using Infrastructure.ServiceLocator;
-using Input;
 using UnityEngine;
 
 namespace Game.Mouse

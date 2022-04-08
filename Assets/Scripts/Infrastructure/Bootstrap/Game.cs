@@ -6,9 +6,7 @@ namespace Infrastructure.Bootstrap
     {
         public IGameStateMachine GameStateMachine;
 
-        public Game(ICoroutineRunner coroutineRunner, LoadingCurtain loadingCurtain)
-        {
+        public Game(ICoroutineRunner coroutineRunner, LoadingCurtain loadingCurtain) => 
             GameStateMachine = new GameStateMachine(ServiceLocator.ServiceLocator.Container, coroutineRunner, loadingCurtain);
-        }
     }
 }

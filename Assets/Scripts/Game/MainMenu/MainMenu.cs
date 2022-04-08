@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace MainMenu
+namespace Game.MainMenu
 {
     public class MainMenu : MonoBehaviour
     {
@@ -10,9 +10,7 @@ namespace MainMenu
         
         public event Action OnPlayButtonClick;
 
-        private void Awake()
-        {
+        private void Awake() => 
             PlayButton.onClick.AddListener(() => OnPlayButtonClick?.Invoke());
-        }
     }
 }

@@ -6,10 +6,8 @@ namespace Utility
     {
         private const float WidthToMaintain = 5.0f;
 
-        public ScreenUtility()
-        {
+        public ScreenUtility() => 
             SetupScreen();
-        }
 
         public float LeftLimit() => 
             Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 0.0f, 0.0f)).x;

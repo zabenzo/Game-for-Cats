@@ -18,10 +18,8 @@ namespace Infrastructure
             Curtain.alpha = 1;
         }
 
-        public void Hide()
-        {
+        public void Hide() => 
             StartCoroutine(HideCurtainRoutine());
-        }
 
         private IEnumerator HideCurtainRoutine()
         {

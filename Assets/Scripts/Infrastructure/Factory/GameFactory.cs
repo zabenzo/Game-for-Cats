@@ -7,22 +7,16 @@ namespace Infrastructure.Factory
     {
         private readonly IAssetProvider _assetProvider;
 
-        public GameFactory(IAssetProvider assetProvider)
-        {
+        public GameFactory(IAssetProvider assetProvider) => 
             _assetProvider = assetProvider;
-        }
-        
+
         public GameObject CreateMouse() => 
             Object.Instantiate(_assetProvider.Mouse());
 
-        public GameObject CreateGameUI()
-        {
-            return Object.Instantiate(_assetProvider.GameUI());
-        }
+        public GameObject CreateGameUI() => 
+            Object.Instantiate(_assetProvider.GameUI());
 
-        public GameObject CreateGameEnvironment()
-        {
-            return Object.Instantiate(_assetProvider.GameEnvironment());
-        }
+        public GameObject CreateGameEnvironment() => 
+            Object.Instantiate(_assetProvider.GameEnvironment());
     }
 }

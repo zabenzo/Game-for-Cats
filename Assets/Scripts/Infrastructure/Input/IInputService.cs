@@ -1,8 +1,7 @@
-using Game.Mouse;
 using Infrastructure.ServiceLocator;
 using UnityEngine;
 
-namespace Input
+namespace Infrastructure.Input
 {
     public interface IInputService : IService
     {
