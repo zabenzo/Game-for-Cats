@@ -12,10 +12,12 @@ namespace Infrastructure.StateMachine.States
         private readonly IGameStateMachine _gameStateMachine;
         private readonly ISceneLoader _sceneLoader;
         private readonly IGameFactory _gameFactory;
+        private readonly LoadingCurtain _loadingCurtain;
 
-        public LoadGameState(IGameStateMachine gameStateMachine, ISceneLoader sceneLoader, IGameFactory gameFactory)
+        public LoadGameState(IGameStateMachine gameStateMachine, ISceneLoader sceneLoader, IGameFactory gameFactory, LoadingCurtain loadingCurtain)
         {
             _gameFactory = gameFactory;
+            _loadingCurtain = loadingCurtain;
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
         }
@@ -31,6 +33,8 @@ namespace Infrastructure.StateMachine.States
             CreateMouse(out MouseLogic mouseLogic);
             CreateScoreCounter(mouseLogic, out ScoreCounter scoreCounter);
             CreateGameUI(scoreCounter, mouseLogic);
+            
+            _loadingCurtain.Hide();
         }
 
         public void Exit()

@@ -14,8 +14,8 @@ namespace Infrastructure
 
         public void Show()
         {
-            Curtain.enabled = true;
-            Curtain.alpha = 1;
+            Curtain.gameObject.SetActive(true);
+            Curtain.alpha = 1.0f;
         }
 
         public void Hide() => 
@@ -25,11 +25,11 @@ namespace Infrastructure
         {
             while (Curtain.alpha > 0.0f)
             {
-                Curtain.alpha -= 0.01f;
+                Curtain.alpha -= 0.05f;
                 yield return new WaitForSeconds(0.05f);
             }
 
-            Curtain.enabled = false;
+            Curtain.gameObject.SetActive(false);
         }
     }
 }

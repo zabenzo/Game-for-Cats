@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Infrastructure.Factory;
 using Infrastructure.SceneLoader;
 using Infrastructure.StateMachine.States;
-using Utility;
 
 namespace Infrastructure.StateMachine
 {
@@ -17,10 +16,10 @@ namespace Infrastructure.StateMachine
         {
             _states = new Dictionary<Type, IState>()
             {
-                [typeof(BootstrapState)] = new BootstrapState(this, serviceLocator, coroutineRunner),
+                [typeof(BootstrapState)] = new BootstrapState(this, serviceLocator, coroutineRunner, loadingCurtain),
                 [typeof(MainMenuState)] = new MainMenuState(this, loadingCurtain, serviceLocator.Single<ISceneLoader>(), serviceLocator.Single<IMainMenuFactory>()),
-                [typeof(LoadGameState)] = new LoadGameState(this, serviceLocator.Single<ISceneLoader>(), serviceLocator.Single<IGameFactory>()),
-                [typeof(GameLoopState)] = new GameLoopState(this)
+                [typeof(LoadGameState)] = new LoadGameState(this, serviceLocator.Single<ISceneLoader>(), serviceLocator.Single<IGameFactory>(), loadingCurtain),
+                [typeof(GameLoopState)] = new GameLoopState(this, loadingCurtain)
             };
         }
 

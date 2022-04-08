@@ -20,12 +20,14 @@ namespace Infrastructure.StateMachine.States
             _mainMenuFactory = mainMenuFactory;
         }
         
-        public void Enter() => 
+        public void Enter()
+        {
             _sceneLoader.Load("MainMenu", InitializeMainMenu);
+        }
 
         public void Exit()
         {
-            
+            _loadingCurtain.Show();
         }
 
         private void InitializeMainMenu()
@@ -33,6 +35,7 @@ namespace Infrastructure.StateMachine.States
             MainMenuController mainMenuController = new MainMenuController(_gameStateMachine);
             GameObject mainMenuCanvas = _mainMenuFactory.CreateMainMenuCanvas();
             mainMenuCanvas.GetComponent<MainMenu>().OnPlayButtonClick += mainMenuController.OnPlayButtonClick;
+            _loadingCurtain.Hide();
         }
     }
 }

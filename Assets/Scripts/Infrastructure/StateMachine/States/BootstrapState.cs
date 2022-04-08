@@ -11,18 +11,23 @@ namespace Infrastructure.StateMachine.States
         private readonly GameStateMachine _gameStateMachine;
         private readonly ServiceLocator.ServiceLocator _serviceLocator;
         private readonly ICoroutineRunner _coroutineRunner;
+        private readonly LoadingCurtain _loadingCurtain;
 
-        public BootstrapState(GameStateMachine gameStateMachine, ServiceLocator.ServiceLocator serviceLocator, ICoroutineRunner coroutineRunner)
+        public BootstrapState(GameStateMachine gameStateMachine, ServiceLocator.ServiceLocator serviceLocator, ICoroutineRunner coroutineRunner, LoadingCurtain loadingCurtain)
         {
             _gameStateMachine = gameStateMachine;
             _serviceLocator = serviceLocator;
             _coroutineRunner = coroutineRunner;
+            _loadingCurtain = loadingCurtain;
 
             RegisterServices();
         }
 
-        public void Enter() => 
+        public void Enter()
+        {
+            _loadingCurtain.Show();
             _gameStateMachine.Enter<MainMenuState>();
+        }
 
         public void Exit()
         {
