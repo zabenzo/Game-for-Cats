@@ -9,5 +9,6 @@ namespace Infrastructure.AssetProvider
         public GameObject Mouse();
         public GameObject GameUI();
         public GameObject GameEnvironment();
+        public AudioClip MouseSound();
     }
 }

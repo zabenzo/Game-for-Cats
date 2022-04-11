@@ -5,21 +5,29 @@ namespace Infrastructure.AssetProvider
     public class AssetProvider : IAssetProvider
     {
         private const string MainMenuCanvasPrefabPath = "MainMenu/MainMenuCanvas";
-        private const string MousePrefab = "Game/Mouse";
-        private const string GameUIPrefab = "GameUI/GameUI";
-        private const string GameEnvironmentPrefab = "";
+        private const string GameUIPrefabPath = "GameUI/GameUI";
+        private const string GameEnvironmentPrefabPath = "";
 
+        private readonly IStaticDataProvider _staticDataProvider;
+
+        public AssetProvider(IStaticDataProvider staticDataProvider)
+        {
+            _staticDataProvider = staticDataProvider;
+        }
 
         public GameObject MainMenuCanvas() => 
             Resources.Load<GameObject>(MainMenuCanvasPrefabPath);
 
-        public GameObject Mouse() => 
-            Resources.Load<GameObject>(MousePrefab);
-
         public GameObject GameUI() => 
-            Resources.Load<GameObject>(GameUIPrefab);
+            Resources.Load<GameObject>(GameUIPrefabPath);
 
         public GameObject GameEnvironment() => 
-            Resources.Load<GameObject>(GameEnvironmentPrefab);
+            Resources.Load<GameObject>(GameEnvironmentPrefabPath);
+
+        public GameObject Mouse() =>
+            _staticDataProvider.GetCurrentMouseType().MousePrefab;
+
+        public AudioClip MouseSound() =>
+            _staticDataProvider.GetCurrentMouseType().MouseSound;
     }
 }

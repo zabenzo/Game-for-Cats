@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Curtain: {fileID: -8279078757161369749, guid: f010589324e3244c7981d94a2a2b96a4, type: 3}
+  AudioSourceController: {fileID: 2046588743822339869, guid: f140c4f59709f49289007674d60aa455, type: 3}

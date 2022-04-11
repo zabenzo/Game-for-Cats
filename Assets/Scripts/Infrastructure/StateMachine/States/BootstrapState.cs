@@ -3,6 +3,7 @@ using Infrastructure.AssetProvider;
 using Infrastructure.Factory;
 using Infrastructure.Input;
 using Infrastructure.SceneLoader;
+using Services.SoundService;
 using Utility;
 
 namespace Infrastructure.StateMachine.States
@@ -13,13 +14,15 @@ namespace Infrastructure.StateMachine.States
         private readonly ServiceLocator.ServiceLocator _serviceLocator;
         private readonly ICoroutineRunner _coroutineRunner;
         private readonly LoadingCurtain _loadingCurtain;
+        private readonly AudioSourceController _audioSourceController;
 
-        public BootstrapState(GameStateMachine gameStateMachine, ServiceLocator.ServiceLocator serviceLocator, ICoroutineRunner coroutineRunner, LoadingCurtain loadingCurtain)
+        public BootstrapState(GameStateMachine gameStateMachine, ServiceLocator.ServiceLocator serviceLocator, ICoroutineRunner coroutineRunner, LoadingCurtain loadingCurtain, AudioSourceController audioSourceController)
         {
             _gameStateMachine = gameStateMachine;
             _serviceLocator = serviceLocator;
             _coroutineRunner = coroutineRunner;
             _loadingCurtain = loadingCurtain;
+            _audioSourceController = audioSourceController;
 
             RegisterServices();
         }
@@ -42,8 +45,10 @@ namespace Infrastructure.StateMachine.States
             _serviceLocator.RegisterSingle<IScreenUtility>(new ScreenUtility());
             _serviceLocator.RegisterSingle<ISceneLoader>(new SceneLoader.SceneLoader(_coroutineRunner));
             _serviceLocator.RegisterSingle<IGameStateMachine>(_gameStateMachine);
-            _serviceLocator.RegisterSingle<IAssetProvider>(new AssetProvider.AssetProvider());
+            _serviceLocator.RegisterSingle<IStaticDataProvider>(new StaticDataProvider());
+            _serviceLocator.RegisterSingle<IAssetProvider>(new AssetProvider.AssetProvider(_serviceLocator.Single<IStaticDataProvider>()));
             _serviceLocator.RegisterSingle<IGameFactory>(new GameFactory(_serviceLocator.Single<IAssetProvider>()));
+            _serviceLocator.RegisterSingle<ISoundService>(new SoundService(_serviceLocator.Single<IAssetProvider>(), _audioSourceController.AudioSource));
             _serviceLocator.RegisterSingle<IMainMenuFactory>(new MainMenuFactory(_serviceLocator.Single<IAssetProvider>()));
         }
     }

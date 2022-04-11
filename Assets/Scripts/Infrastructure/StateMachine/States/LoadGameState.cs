@@ -1,8 +1,10 @@
 using Game.GameMenu;
 using Game.Mouse;
 using Game.ScoreCounter;
+using Infrastructure.AssetProvider;
 using Infrastructure.Factory;
 using Infrastructure.SceneLoader;
+using StaticData;
 using UnityEngine;
 
 namespace Infrastructure.StateMachine.States
@@ -13,11 +15,13 @@ namespace Infrastructure.StateMachine.States
         private readonly ISceneLoader _sceneLoader;
         private readonly IGameFactory _gameFactory;
         private readonly LoadingCurtain _loadingCurtain;
+        private readonly IStaticDataProvider _staticDataProvider;
 
-        public LoadGameState(IGameStateMachine gameStateMachine, ISceneLoader sceneLoader, IGameFactory gameFactory, LoadingCurtain loadingCurtain)
+        public LoadGameState(IGameStateMachine gameStateMachine, ISceneLoader sceneLoader, IGameFactory gameFactory, LoadingCurtain loadingCurtain, IStaticDataProvider staticDataProvider)
         {
             _gameFactory = gameFactory;
             _loadingCurtain = loadingCurtain;
+            _staticDataProvider = staticDataProvider;
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
         }
@@ -51,8 +55,10 @@ namespace Infrastructure.StateMachine.States
         private void CreateMouse(out MouseLogic mouseLogic)
         {
             GameObject mouse = _gameFactory.CreateMouse();
-            mouse.GetComponent<MouseMove>().Construct(moveSpeed: 3.0f);
+            MouseType currentMouseType = _staticDataProvider.GetCurrentMouseType();
             mouseLogic = mouse.GetComponent<MouseLogic>();
+            mouse.GetComponent<MouseMove>().Construct(moveSpeed: currentMouseType.Speed);
+            mouse.GetComponent<MouseSoundReproduction>().Construct(delay: currentMouseType.SoundDelay);
         }
 
         private void CreateGameUI(ScoreCounter scoreCounter, MouseLogic mouseLogic)

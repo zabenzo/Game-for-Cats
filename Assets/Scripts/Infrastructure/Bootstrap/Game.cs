@@ -1,4 +1,5 @@
 using Infrastructure.StateMachine;
+using Services.SoundService;
 
 namespace Infrastructure.Bootstrap
 {
@@ -6,7 +7,7 @@ namespace Infrastructure.Bootstrap
     {
         public IGameStateMachine GameStateMachine;
 
-        public Game(ICoroutineRunner coroutineRunner, LoadingCurtain loadingCurtain) => 
-            GameStateMachine = new GameStateMachine(ServiceLocator.ServiceLocator.Container, coroutineRunner, loadingCurtain);
+        public Game(ICoroutineRunner coroutineRunner, LoadingCurtain loadingCurtain, AudioSourceController audioSourceController) => 
+            GameStateMachine = new GameStateMachine(ServiceLocator.ServiceLocator.Container, coroutineRunner, loadingCurtain, audioSourceController);
     }
 }
